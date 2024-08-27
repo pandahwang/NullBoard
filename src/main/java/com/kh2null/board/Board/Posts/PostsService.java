@@ -1,4 +1,4 @@
-package com.kh2null.board.Board.Post;
+package com.kh2null.board.Board.Posts;
 
 import org.springframework.stereotype.Service;
 
