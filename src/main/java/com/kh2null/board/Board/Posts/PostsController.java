@@ -30,10 +30,10 @@ public class PostsController {
     
     // 게시글 페이지 이동
     // pathvariable로 조회
-    @GetMapping("/post/{post_id}")
+    @GetMapping("/post/{postId}")
     @ResponseBody
-    public Posts readPostById(@PathVariable int post_id){
-        Posts result = postsService.getPostById(post_id);
+    public Posts readPostById(@PathVariable int postId){
+        Posts result = postsService.getPostById(postId);
         return result;
     }
 
@@ -46,30 +46,30 @@ public class PostsController {
 //    }
     
     // 게시글 수정 페이지 이동
-    @GetMapping("/board/post/{post_id}/edit")
-    public String editPostPage(@PathVariable int post_id, Model model){
-        Posts result = postsService.getPostById(post_id);
+    @GetMapping("/board/post/{postId}/edit")
+    public String editPostPage(@PathVariable int postId, Model model){
+        Posts result = postsService.getPostById(postId);
         return "editPost";
     }
     
     // 게시글 수정
-    @PostMapping("/board/post/{post_id}/edit")
-    public String editPost(@PathVariable int post_id, Posts posts){
-        postsService.editPostById(post_id, posts);
+    @PostMapping("/board/post/{postId}/edit")
+    public String editPost(@PathVariable int postId, Posts posts){
+        postsService.editPostById(postId, posts);
         return "redirect:/board";
     }
 
     // 게시글 삭제 페이지 이동
-    @GetMapping("/board/post/{post_id}/delete")
-    public String deletePostPage(@PathVariable int post_id){
-        Posts result = postsService.getPostById(post_id);
+    @GetMapping("/board/post/{postId}/delete")
+    public String deletePostPage(@PathVariable int postId){
+        Posts result = postsService.getPostById(postId);
         return "deletePost";
     }
 
     // 게시글 삭제
-    @PostMapping("/board/post/{post_id}/delete")
-    public String deletePost(@PathVariable int post_id){
-        postsService.deletePostById(post_id);
+    @PostMapping("/board/post/{postId}/delete")
+    public String deletePost(@PathVariable int postId){
+        postsService.deletePostById(postId);
         return "redirect:/board";
     }
 
