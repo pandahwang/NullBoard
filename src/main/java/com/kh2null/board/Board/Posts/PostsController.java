@@ -59,15 +59,21 @@ public class PostsController {
         return "redirect:/board";
     }
 
-    @GetMapping("/posts/update")
-    public String postsUpdate() {
-        return "posts-update";
+    // 게시글 삭제 페이지 이동
+    @GetMapping("/board/post/{post_id}/delete")
+    public String deletePostPage(@PathVariable int post_id){
+        Posts result = postsService.getPostById(post_id);
+        return "deletePost";
     }
 
-    @GetMapping("/posts")
-    public String posts() {
-        return "posts";
+    // 게시글 삭제
+    @PostMapping("/board/post/{post_id}/delete")
+    public String deletePost(@PathVariable int post_id){
+        postsService.deletePostById(post_id);
+        return "redirect:/board";
     }
+
+
 
 
 }
