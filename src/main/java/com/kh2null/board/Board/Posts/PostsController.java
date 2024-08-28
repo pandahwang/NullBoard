@@ -30,7 +30,7 @@ public class PostsController {
     
     // 게시글 페이지 이동
     // pathvariable로 조회
-    @GetMapping("/post/{postId}")
+    @GetMapping("/board/post/{postId}")
     @ResponseBody
     public Posts readPostById(@PathVariable int postId){
         Posts result = postsService.getPostById(postId);
@@ -38,7 +38,7 @@ public class PostsController {
     }
 
 //    // queryparameter로 조회
-//    @GetMapping("/post")
+//    @GetMapping("/board/post")
 //    @ResponseBody
 //    public Posts readPost(@RequestParam int post_id){
 //        Posts result = postsService.getPostById(post_id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
