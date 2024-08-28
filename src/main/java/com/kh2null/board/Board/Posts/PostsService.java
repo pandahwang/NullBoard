@@ -3,6 +3,8 @@ package com.kh2null.board.Board.Posts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
 @Service
 @RequiredArgsConstructor
 public class PostsService {
@@ -27,6 +29,7 @@ public class PostsService {
         Posts result = getPostById(post_id);
         result.setTitle(posts.getTitle());
         result.setContent(posts.getContent());
+        result.setUpdated_at(new Timestamp(System.currentTimeMillis()));
         postsRepository.save(result);
     }
     
