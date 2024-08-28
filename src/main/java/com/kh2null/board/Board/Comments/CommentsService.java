@@ -15,7 +15,7 @@ public class CommentsService {
         commentsRepository.save(comments);
     }
 
-    public Comments getCommentById(int post_id, int comment_id) {
+    public Comments findCommentById(int post_id, int comment_id) {
         Comments result = commentsRepository.findByPostCommentId(post_id, comment_id);
         System.out.println("comment_id : " + result.getComment_id());
         System.out.println("post_id : " + result.getPost_id());
@@ -25,8 +25,13 @@ public class CommentsService {
     }
 
     public void editComment(int post_id, int comment_id,Comments comments) {
-        Comments result = getCommentById(post_id, comment_id);
+        Comments result = findCommentById(post_id, comment_id);
         result.setContent(comments.getContent());
         commentsRepository.save(result);
+    }
+
+    public void deleteComment(int post_id, int comment_id) {
+        Comments result = findCommentById(post_id, comment_id);
+        commentsRepository.delete(result);
     }
 }

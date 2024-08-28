@@ -20,13 +20,25 @@ public class CommentsController {
 
     @GetMapping("/board/post/{postId}/comment/{commentId}/edit")
     public String editCommentForm(@PathVariable int postId, @PathVariable int commentId) {
-        commentsService.getCommentById(postId, commentId);
+        commentsService.findCommentById(postId, commentId);
         return "editComment";
     }
 
     @PostMapping("/board/post/{postId}/comment/{commentId}/edit")
     public String editComment(@PathVariable int postId, @PathVariable int commentId, Comments comments) {
         commentsService.editComment(postId, commentId, comments);
+        return "redirect:/board/post/{postId}";
+    }
+
+    @GetMapping("/board/post/{postId}/comment/{commentId}/delete")
+    public String deleteCommentPage(@PathVariable int postId, @PathVariable int commentId) {
+        commentsService.findCommentById(postId, commentId);
+        return "deleteComment";
+    }
+
+    @PostMapping("/board/post/{postId}/comment/{commentId}/delete")
+    public String deleteComment(@PathVariable int postId, @PathVariable int commentId) {
+        commentsService.deleteComment(postId, commentId);
         return "redirect:/board/post/{postId}";
     }
 }
