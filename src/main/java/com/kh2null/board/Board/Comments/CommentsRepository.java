@@ -10,5 +10,8 @@ public interface CommentsRepository extends JpaRepository<Comments, Integer> {
     @Query(value = "SELECT * FROM comments WHERE post_id = ?1 AND comment_id = ?2", nativeQuery = true)
     public Comments findByPostCommentId(int post_id, int comment_id);
 
+    @Query(value = "SELECT * FROM comments WHERE post_id = ?1", nativeQuery = true)
+    public List<Comments> findCommentsByPostId(int post_id);
+
 
 }

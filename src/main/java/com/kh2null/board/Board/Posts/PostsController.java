@@ -1,11 +1,13 @@
 package com.kh2null.board.Board.Posts;
 
-import jakarta.websocket.server.PathParam;
+import com.kh2null.board.Board.Comments.Comments;
+import com.kh2null.board.Board.Comments.CommentsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -13,6 +15,7 @@ import java.util.List;
 public class PostsController {
 
     private final PostsRepository postsRepository;
+    private final CommentsRepository commentsRepository;
     private final PostsService postsService;
     
     // 글쓰기 페이지 이동
@@ -28,14 +31,30 @@ public class PostsController {
         return "redirect:/board";
     }
     
-    // 게시글 페이지 이동
-    // pathvariable로 조회
+    // 게시글 페이지 이동 + 댓글 조회
     @GetMapping("/board/post/{postId}")
     @ResponseBody
-    public Posts readPostById(@PathVariable int postId){
-        Posts result = postsService.getPostById(postId);
+    public List<Object> readPostById(@PathVariable int postId){
+        Posts resultPost = postsService.getPostById(postId);
+        List<Comments> resultComments = commentsRepository.findCommentsByPostId(postId);
+
+        List<Object> result = new ArrayList<>();
+        result.add(resultPost);
+        resultComments.forEach(comment ->{
+            result.add(comment);
+        } );
         return result;
     }
+
+//    // 게시글 페이지 이동
+//    // pathvariable로 조회
+//    @GetMapping("/board/post/{postId}")
+//    @ResponseBody
+//    public Posts readPostById(@PathVariable int postId){
+//        Posts result = postsService.getPostById(postId);
+//        System.out.println(result.getClass());
+//        return result;
+//    }
 
 //    // queryparameter로 조회
 //    @GetMapping("/board/post")
