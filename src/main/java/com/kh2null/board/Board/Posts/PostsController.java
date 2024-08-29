@@ -12,27 +12,15 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/board")
 public class PostsController {
 
     private final PostsRepository postsRepository;
     private final CommentsRepository commentsRepository;
     private final PostsService postsService;
     
-    // 글쓰기 페이지 이동
-    @GetMapping("/write-form")
-    public String writeForm(){
-        return "write-form";
-    }
-    
-    // 글쓰기
-    @PostMapping("/write-form")
-    public String write(Posts posts){
-        postsService.save(posts);
-        return "redirect:/board";
-    }
-    
     // 게시글 페이지 이동 + 댓글 조회
-    @GetMapping("/board/post/{postId}")
+    @GetMapping("/post/{postId}")
     @ResponseBody
     public List<Object> readPostById(@PathVariable int postId){
         Posts resultPost = postsService.getPostById(postId);
@@ -52,7 +40,7 @@ public class PostsController {
 
 //    // 게시글 페이지 이동
 //    // pathvariable로 조회
-//    @GetMapping("/board/post/{postId}")
+//    @GetMapping("/post/{postId}")
 //    @ResponseBody
 //    public Posts readPostById(@PathVariable int postId){
 //        Posts result = postsService.getPostById(postId);
@@ -61,7 +49,7 @@ public class PostsController {
 //    }
 
 //    // queryparameter로 조회
-//    @GetMapping("/board/post")
+//    @GetMapping("/post")
 //    @ResponseBody
 //    public Posts readPost(@RequestParam int post_id){
 //        Posts result = postsService.getPostById(post_id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
@@ -69,28 +57,28 @@ public class PostsController {
 //    }
     
     // 게시글 수정 페이지 이동
-    @GetMapping("/board/post/{postId}/edit")
+    @GetMapping("/post/{postId}/edit")
     public String editPostPage(@PathVariable int postId, Model model){
         Posts result = postsService.getPostById(postId);
         return "editPost";
     }
     
     // 게시글 수정
-    @PostMapping("/board/post/{postId}/edit")
+    @PostMapping("/post/{postId}/edit")
     public String editPost(@PathVariable int postId, Posts posts){
         postsService.editPostById(postId, posts);
         return "redirect:/board";
     }
 
     // 게시글 삭제 페이지 이동
-    @GetMapping("/board/post/{postId}/delete")
+    @GetMapping("/post/{postId}/delete")
     public String deletePostPage(@PathVariable int postId){
         Posts result = postsService.getPostById(postId);
         return "deletePost";
     }
 
     // 게시글 삭제
-    @PostMapping("/board/post/{postId}/delete")
+    @PostMapping("/post/{postId}/delete")
     public String deletePost(@PathVariable int postId){
         postsService.deletePostById(postId);
         return "redirect:/board";
