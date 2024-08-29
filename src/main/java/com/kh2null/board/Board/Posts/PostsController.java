@@ -40,9 +40,13 @@ public class PostsController {
 
         List<Object> result = new ArrayList<>();
         result.add(resultPost);
-        resultComments.forEach(comment ->{
-            result.add(comment);
-        } );
+        if(resultComments.isEmpty()){
+            result.add("댓글이 없습니다.");
+        } else{
+            resultComments.forEach(comment ->{
+                result.add(comment);
+            } );
+        }
         return result;
     }
 
