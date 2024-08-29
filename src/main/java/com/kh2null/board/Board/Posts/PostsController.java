@@ -18,7 +18,20 @@ public class PostsController {
     private final PostsRepository postsRepository;
     private final CommentsRepository commentsRepository;
     private final PostsService postsService;
-    
+
+    // 글쓰기 페이지 이동
+    @GetMapping("/write-form")
+    public String writeForm(){
+        return "write-form";
+    }
+
+    // 글쓰기
+    @PostMapping("/write-form")
+    public String write(Posts posts){
+        postsService.save(posts);
+        return "redirect:/board";
+    }
+
     // 게시글 페이지 이동 + 댓글 조회
     @GetMapping("/post/{postId}")
     @ResponseBody
