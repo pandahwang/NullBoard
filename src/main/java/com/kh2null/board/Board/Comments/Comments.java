@@ -13,17 +13,17 @@ public class Comments {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer comment_id;
+    private Integer commentId;
 
     @Column(nullable = false)
-    private Integer post_id;
+    private Integer postId;
 
     @Column(nullable = false)
-    private Integer user_id;
+    private Integer userId;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
     @Column(nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Timestamp created_at;
+    private Timestamp createdAt;
 }

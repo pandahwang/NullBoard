@@ -12,10 +12,10 @@ public class Posts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer post_id;
+    private Integer postId;
 
     @Column(nullable = false)
-    private Integer user_id;
+    private Integer userId;
 
     @Column(nullable = false, length = 255)
     private String title;
@@ -24,8 +24,8 @@ public class Posts {
     private String content;
 
     @Column(nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Timestamp created_at;
+    private Timestamp createdAt;
 
     @Column(nullable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-    private Timestamp updated_at;
+    private Timestamp updatedAt;
 }

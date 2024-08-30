@@ -17,25 +17,25 @@ public class CommentsService {
     }
     
     // id로 댓글 조회
-    public Comments findCommentById(int post_id, int comment_id) {
-        Comments result = commentsRepository.findByPostCommentId(post_id, comment_id);
-        System.out.println("comment_id : " + result.getComment_id());
-        System.out.println("post_id : " + result.getPost_id());
-        System.out.println("user_id : " + result.getUser_id());
+    public Comments findCommentById(int postId, int commentId) {
+        Comments result = commentsRepository.findByCommentIdAndPostId(postId, commentId);
+        System.out.println("comment_id : " + result.getCommentId());
+        System.out.println("post_id : " + result.getPostId());
+        System.out.println("user_id : " + result.getUserId());
         System.out.println("content : " + result.getContent());
         return result;
     }
 
     // 댓글 수정
-    public void editComment(int post_id, int comment_id,Comments comments) {
-        Comments result = findCommentById(post_id, comment_id);
+    public void editComment(int postId, int commentId,Comments comments) {
+        Comments result = findCommentById(postId, commentId);
         result.setContent(comments.getContent());
         commentsRepository.save(result);
     }
 
     // 댓글 삭제
-    public void deleteComment(int post_id, int comment_id) {
-        Comments result = findCommentById(post_id, comment_id);
+    public void deleteComment(int postId, int commentId) {
+        Comments result = findCommentById(postId, commentId);
         commentsRepository.delete(result);
     }
 }

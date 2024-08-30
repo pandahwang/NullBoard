@@ -16,26 +16,26 @@ public class PostsService {
     }
     
     // ID로 게시글 찾기
-    public Posts getPostById(int post_id) {
-        Posts result = postsRepository.findById(post_id).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
-        System.out.println("post_id : " + result.getPost_id());
-        System.out.println("user_id : " + result.getUser_id());
+    public Posts getPostById(int postId) {
+        Posts result = postsRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
+        System.out.println("post_id : " + result.getPostId());
+        System.out.println("user_id : " + result.getUserId());
         System.out.println("title : " + result.getTitle());
         return result;
     }
 
     // 게시글 수정
-    public void editPostById(int post_id, Posts posts) {
-        Posts result = getPostById(post_id);
+    public void editPostById(int postId, Posts posts) {
+        Posts result = getPostById(postId);
         result.setTitle(posts.getTitle());
         result.setContent(posts.getContent());
-        result.setUpdated_at(new Timestamp(System.currentTimeMillis()));
+        result.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
         postsRepository.save(result);
     }
     
     // 게시글 삭제
-    public void deletePostById(int post_id) {
-        Posts result = getPostById(post_id);
+    public void deletePostById(int postId) {
+        Posts result = getPostById(postId);
         postsRepository.delete(result);
     }
 }

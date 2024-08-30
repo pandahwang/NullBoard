@@ -37,7 +37,7 @@ public class PostsController {
     @ResponseBody
     public List<Object> readPostById(@PathVariable int postId){
         Posts resultPost = postsService.getPostById(postId);
-        List<Comments> resultComments = commentsRepository.findCommentsByPostId(postId);
+        List<Comments> resultComments = commentsRepository.findByPostId(postId);
 
         List<Object> result = new ArrayList<>();
         result.add(resultPost);
